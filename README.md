@@ -1,1 +1,4 @@
-# 4-bit-Nano-processor-project
+## To Do:
+
+*   Program ROM 
+*   Instruction Decoder
