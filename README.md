@@ -1,1 +1,4 @@
-# 4-bit-Nano-processor-project
+## To Do:
+
+*   3 to 8 Decoder
+*   Counter
