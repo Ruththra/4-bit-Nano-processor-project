@@ -44,5 +44,6 @@ begin
 
 -- JumpFlag=1 -> JumpAddress
 
-NextPC <= (SeqAdd and not(2 downto 0=> JumpFlag)) or (JumpAdd and (2 downto 0=>JumpFlag));
+NextPC <= JumpAdd when JumpFlag = '1' else SeqAdd;
+
 end Behavioral;
