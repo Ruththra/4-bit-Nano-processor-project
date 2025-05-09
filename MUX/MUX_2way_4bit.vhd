@@ -43,7 +43,7 @@ architecture Behavioral of MUX_2way_4bit is
 begin
 
 -- loadSel=1 -> Immediate value
-OutputVal <= ImmedVal when loadSel = '1' else ALUVal;
+OutputVal <= ImmedVal when loadSel = '0' else ALUVal;
 
 -- OutputVal<=(ImmedVal and  (3 downto 0=>loadSel)) or (ALUVal and not (3 downto 0=>loadSel));
 
