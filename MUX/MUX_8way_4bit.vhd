@@ -8,7 +8,7 @@
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
--- Description: 
+-- Description: 8-to-1 multiplexer, each input 4-bit wide
 -- 
 -- Dependencies: 
 -- 
@@ -18,18 +18,8 @@
 -- 
 ----------------------------------------------------------------------------------
 
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity MUX_8way_4bit is
     Port ( R0 : in STD_LOGIC_VECTOR (3 downto 0);
@@ -45,22 +35,16 @@ entity MUX_8way_4bit is
 end MUX_8way_4bit;
 
 architecture Behavioral of MUX_8way_4bit is
-
-signal S0_0,S0_1,S0_2,S0_3,S1_0,S1_1:STD_LOGIC_VECTOR(3 DOWNTO 0);
-
 begin
 
-    S0_0 <= (R0 and not (3 downto 0=>RegSel(0))) or (R1 and (3 downto 0=>RegSel(0)));
-    S0_1 <= (R2 and not (3 downto 0=>RegSel(0))) or (R3 and (3 downto 0=>RegSel(0)));
-    S0_2 <= (R4 and not (3 downto 0=>RegSel(0))) or (R5 and (3 downto 0=>RegSel(0)));
-    S0_3 <= (R6 and not (3 downto 0=>RegSel(0))) or (R7 and (3 downto 0=>RegSel(0)));
-    
-    S1_0 <= (S0_0 and not (3 downto 0=>RegSel(1))) or (S0_1 and (3 downto 0=>RegSel(1)));
-    S1_1 <= (S0_2 and not (3 downto 0=>RegSel(1))) or (S0_3 and (3 downto 0=>RegSel(1)));
-    
-    RegVal <= (S1_0 and not (3 downto 0=>RegSel(2))) or (S1_1 and (3 downto 0=>RegSel(2)));
-    
+    with RegSel select
+        RegVal <= R0 when "000",
+                  R1 when "001",
+                  R2 when "010",
+                  R3 when "011",
+                  R4 when "100",
+                  R5 when "101",
+                  R6 when "110",
+                  R7 when "111";
+
 end Behavioral;
-
-
-
